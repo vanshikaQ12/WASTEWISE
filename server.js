@@ -735,26 +735,21 @@ app.use(express.static(__dirname));
    START SERVER
 ========================= */
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 mongoose.connect(process.env.MONGODB_URI, {
     family: 4
 })
-    .then(() => {
+.then(() => {
+    console.log("MongoDB connected successfully!");
 
-        console.log("MongoDB connected successfully!");
-
-        app.listen(PORT, () => {
-            console.log(
-                `WasteWise server running at http://localhost:${PORT}`
-            );
-        });
-
-    })
-    .catch((error) => {
-
-        console.error(
-            "MongoDB connection failed:",
-            error.message
-        );
+    app.listen(PORT, "0.0.0.0", () => {
+        console.log(`WasteWise server running on port ${PORT}`);
     });
+})
+.catch((error) => {
+    console.error(
+        "MongoDB connection failed:",
+        error.message
+    );
+});
