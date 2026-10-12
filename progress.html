@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WasteWise | Progress</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;background:#050807;color:#fff;font-family:Arial,Helvetica,sans-serif}
+.page{min-height:100vh;padding:30px 6% 60px;background:radial-gradient(circle at 80% 18%,rgba(97,255,155,.11),transparent 32%),radial-gradient(circle at 18% 85%,rgba(97,255,155,.045),transparent 30%),#050807}
+nav{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-bottom:25px;border-bottom:1px solid rgba(255,255,255,.1)}
+.logo{font-size:25px;font-weight:bold;white-space:nowrap}
+.logo span{color:#61ff9b}
+nav .links{display:flex;flex-wrap:wrap;align-items:center;gap:26px}
+nav a{color:rgba(255,255,255,.6);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color .2s ease}
+nav a:hover,nav a.active{color:#61ff9b}
+main{width:min(760px,100%);margin:0 auto;padding-top:clamp(55px,10vh,105px);text-align:center}
+.eyebrow{color:#61ff9b;font-size:10px;letter-spacing:4px;text-transform:uppercase}
+h1{margin:18px 0 14px;font-size:clamp(38px,7vw,68px);letter-spacing:-2px;line-height:1.02}
+h1 span{color:#61ff9b}
+.intro{max-width:430px;margin:0 auto;color:rgba(255,255,255,.52);font-size:14px;line-height:1.8}
+.streak-card{width:min(430px,100%);margin:42px auto 0;padding:38px 28px 34px;border:1px solid rgba(97,255,155,.24);border-radius:24px;background:linear-gradient(145deg,rgba(97,255,155,.075),rgba(255,255,255,.018));box-shadow:0 24px 80px rgba(0,0,0,.28),0 0 48px rgba(97,255,155,.045)}
+.streak-icon{display:grid;place-items:center;width:68px;height:68px;margin:0 auto 22px;border:1px solid rgba(97,255,155,.22);border-radius:50%;background:rgba(97,255,155,.07);font-size:30px}
+.streak-number{color:#61ff9b;font-size:clamp(64px,12vw,86px);font-weight:700;line-height:1;letter-spacing:-3px}
+.streak-label{margin-top:14px;color:rgba(255,255,255,.78);font-size:11px;letter-spacing:4px;text-transform:uppercase}
+.streak-note{margin-top:23px;padding-top:19px;border-top:1px solid rgba(255,255,255,.09);color:rgba(255,255,255,.43);font-size:12px;line-height:1.7}
+@media(max-width:640px){.page{padding:22px 20px 45px}nav{align-items:flex-start;flex-direction:column;padding-bottom:20px}nav .links{gap:17px}nav a{font-size:10px;letter-spacing:1px}.streak-card{margin-top:32px;padding:32px 22px 28px}}
+</style>
+</head>
+<body>
+<div class="page">
+    <nav>
+        <div class="logo">Waste<span>Wise</span></div>
+        <div class="links">
+            <a href="learn.html">Learn</a>
+            <a href="play.html">Play</a>
+            <a href="about.html">About</a>
+            <a href="progress.html" class="active" aria-current="page">Progress</a>
+        </div>
+    </nav>
+
+    <main>
+        <p class="eyebrow">Small actions. Lasting change.</p>
+        <h1>YOUR <span>STREAK.</span></h1>
+        <p class="intro">Keep showing up for a greener tomorrow.</p>
+
+        <section class="streak-card" aria-label="Your current daily streak">
+            <div class="streak-icon" aria-hidden="true">♻</div>
+            <div class="streak-number" id="streakValue">0</div>
+            <div class="streak-label">Day Streak</div>
+            <p class="streak-note">Earn points in Play each day to keep your streak going.</p>
+        </section>
+    </main>
+</div>
+
+<script>
+function wasteWiseLocalDateKey(date = new Date()) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
+function renderStreak() {
+    const lastActivityKey = localStorage.getItem("wastewiseLastActivityDate");
+    const savedStreak = Number(localStorage.getItem("wastewiseStreak")) || 0;
+    const todayKey = wasteWiseLocalDateKey(new Date());
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayKey = wasteWiseLocalDateKey(yesterday);
+
+    const streakIsCurrent =
+        lastActivityKey === todayKey || lastActivityKey === yesterdayKey;
+
+    document.getElementById("streakValue").textContent =
+        streakIsCurrent ? String(savedStreak) : "0";
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+    // Keep the existing session gate: Progress remains available only to logged-in users.
+    try {
+        const response = await fetch("/api/me", {
+            credentials: "same-origin"
+        });
+
+        if (!response.ok) {
+            window.location.href = "/LOGIN.html";
+            return;
+        }
+
+        renderStreak();
+    } catch (error) {
+        console.error("Progress loading error:", error);
+        window.location.href = "/LOGIN.html";
+    }
+});
+</script>
+</body>
+</html>

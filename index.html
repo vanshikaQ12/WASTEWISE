@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WasteWise | Start Your Journey</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050807;
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+    overflow-x:hidden;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    position:relative;
+    overflow:hidden;
+
+    background:
+        radial-gradient(circle at 50% 45%,rgba(29,120,68,.13),transparent 30%),
+        radial-gradient(circle at 50% 100%,rgba(24,75,45,.18),transparent 40%),
+        #050807;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:.08;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+
+    background-size:70px 70px;
+}
+
+/* NAV */
+
+nav{
+    position:relative;
+    z-index:20;
+
+    height:88px;
+    margin:0 4%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-size:24px;
+    font-weight:700;
+}
+
+.logo-icon{
+    color:#61ff9b;
+    font-size:30px;
+}
+
+.logo span{
+    color:#61ff9b;
+}
+
+.nav-links{
+    display:flex;
+    gap:34px;
+}
+
+.nav-links a{
+    color:rgba(255,255,255,.7);
+    text-decoration:none;
+
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#61ff9b;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.login{
+    border:1px solid rgba(255,255,255,.4);
+    border-radius:30px;
+
+    padding:12px 25px;
+
+    color:white;
+    background:transparent;
+
+    letter-spacing:2px;
+    font-size:10px;
+
+    cursor:pointer;
+}
+
+.login:hover{
+    background:#61ff9b;
+    color:#061009;
+}
+
+/* SIDE TEXT */
+
+.side-text{
+    position:absolute;
+    top:175px;
+
+    font-size:9px;
+    line-height:1.7;
+    letter-spacing:4px;
+
+    color:rgba(255,255,255,.65);
+    z-index:5;
+}
+
+.side-left{
+    left:4%;
+}
+
+.side-right{
+    right:4%;
+    text-align:right;
+}
+
+.side-line{
+    width:45px;
+    height:1px;
+    background:#61ff9b;
+    margin-top:14px;
+}
+
+.side-right .side-line{
+    margin-left:auto;
+}
+
+/* HUGE TITLE */
+
+.waste-title{
+    position:absolute;
+
+    top: 115px;
+    left:50%;
+
+    width:100%;
+
+    transform:translateX(-50%) scaleX(.84);
+    transform-origin:center;
+
+    text-align:center;
+    white-space:nowrap;
+
+    font-size:clamp(85px,15vw,235px);
+    font-weight:900;
+
+    letter-spacing:-10px;
+    line-height:1;
+
+    color:#eeeeeb;
+
+    z-index:1;
+
+    user-select:none;
+}
+
+/* BIN */
+
+.bin-area{
+    position:absolute;
+
+    top:56%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:450px;
+    height:500px;
+
+    z-index:5;
+}
+
+.green-glow{
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:rgba(47,255,124,.13);
+
+    filter:blur(70px);
+}
+
+.bin{
+    position:absolute;
+
+    width:220px;
+    height:285px;
+
+    left:50%;
+    top:100px;
+
+    transform:translateX(-50%);
+
+    border-radius:15px 15px 30px 30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0d3c25,
+            #17663b 30%,
+            #0c4829 70%,
+            #082c1b
+        );
+
+    box-shadow:
+        inset 15px 0 25px rgba(255,255,255,.08),
+        inset -15px 0 25px rgba(0,0,0,.35),
+        0 30px 80px rgba(0,0,0,.6);
+}
+
+.bin::before{
+    content:"";
+
+    position:absolute;
+
+    width:240px;
+    height:35px;
+
+    left:-10px;
+    top:-24px;
+
+    border-radius:10px 10px 5px 5px;
+
+    background:#0a341f;
+}
+
+.bin::after{
+    content:"";
+
+    position:absolute;
+
+    width:60px;
+    height:12px;
+
+    top:-34px;
+    left:80px;
+
+    border-radius:10px;
+
+    background:#092619;
+}
+
+.wheel{
+    position:absolute;
+
+    width:38px;
+    height:38px;
+
+    bottom:-17px;
+
+    border-radius:50%;
+
+    background:#06150d;
+    border:5px solid #153e28;
+}
+
+.wheel-left{
+    left:30px;
+}
+
+.wheel-right{
+    right:30px;
+}
+
+.recycle-symbol{
+    position:absolute;
+
+    top:90px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:95px;
+
+    color:rgba(235,255,241,.9);
+
+    text-shadow:0 0 20px rgba(97,255,155,.2);
+}
+
+/* ARROWS */
+
+.arrow{
+    position:absolute;
+
+    width:190px;
+    height:95px;
+
+    border:7px solid rgba(104,255,157,.9);
+
+    filter:
+        drop-shadow(0 0 8px #42ff8c)
+        drop-shadow(0 0 25px rgba(52,255,125,.4));
+
+    opacity:.9;
+}
+
+.arrow::after{
+    content:"";
+
+    position:absolute;
+
+    width:0;
+    height:0;
+
+    border-top:24px solid transparent;
+    border-bottom:24px solid transparent;
+    border-left:45px solid #69ff9c;
+}
+
+.arrow-one{
+    top:80px;
+    left:-25px;
+
+    border-left-color:transparent;
+    border-bottom-color:transparent;
+
+    border-radius:0 100px 0 0;
+
+    transform:rotate(-25deg);
+}
+
+.arrow-one::after{
+    right:-48px;
+    bottom:-26px;
+}
+
+.arrow-two{
+    right:-40px;
+    top:185px;
+
+    border-top-color:transparent;
+    border-left-color:transparent;
+
+    border-radius:0 0 100px 0;
+
+    transform:rotate(25deg);
+}
+
+.arrow-two::after{
+    left:-49px;
+    top:-27px;
+
+    transform:rotate(190deg);
+}
+
+.arrow-three{
+    left:50px;
+    bottom:15px;
+
+    border-right-color:transparent;
+    border-bottom-color:transparent;
+
+    border-radius:100px 0 0 0;
+
+    transform:rotate(145deg);
+}
+
+.arrow-three::after{
+    right:-46px;
+    top:-25px;
+
+    transform:rotate(145deg);
+}
+
+/* HERO COPY */
+
+.hero-copy{
+    position:absolute;
+
+    left:4%;
+    bottom:145px;
+
+    width:390px;
+
+    z-index:10;
+}
+
+.hero-copy h2{
+    font-size:48px;
+    line-height:.95;
+    letter-spacing:-3px;
+
+    margin-bottom:22px;
+}
+
+.hero-copy h2 span{
+    color:#61ff9b;
+}
+
+.hero-copy p{
+    color:rgba(255,255,255,.62);
+
+    line-height:1.7;
+    font-size:14px;
+
+    max-width:350px;
+
+    margin-bottom:28px;
+}
+
+.enter-button{
+    display:inline-flex;
+    align-items:center;
+    gap:15px;
+
+    border:1px solid #61ff9b;
+    border-radius:40px;
+
+    padding:8px 25px 8px 8px;
+
+    color:white;
+    background:transparent;
+
+    font-size:12px;
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.35s;
+}
+
+.enter-button .circle{
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#61ff9b;
+    color:#061009;
+
+    font-size:20px;
+}
+
+.enter-button:hover{
+    background:#61ff9b;
+    color:#061009;
+    transform:translateX(5px);
+}
+
+/* RIGHT TEXT */
+
+.right-content{
+    position:absolute;
+
+    right:4%;
+    bottom:155px;
+
+    width:260px;
+
+    z-index:10;
+}
+
+.right-content p{
+    color:rgba(255,255,255,.55);
+    font-size:12px;
+    line-height:1.8;
+}
+
+/* ROADMAP */
+
+.roadmap{
+    position:absolute;
+
+    left:4%;
+    right:4%;
+    bottom:28px;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+    z-index:15;
+}
+
+.step{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding-top:15px;
+
+    border-top:1px solid rgba(255,255,255,.18);
+}
+
+.step-number{
+    font-size:20px;
+    color:#61ff9b;
+    font-weight:700;
+}
+
+.step-text{
+    font-size:9px;
+    letter-spacing:2px;
+    line-height:1.4;
+
+    color:rgba(255,255,255,.75);
+}
+
+/* SCROLL */
+
+.scroll{
+    position:absolute;
+
+    right:3.5%;
+    top:50%;
+
+    writing-mode:vertical-rl;
+
+    font-size:9px;
+    letter-spacing:4px;
+
+    color:rgba(255,255,255,.4);
+}
+
+/* ANIMATION */
+
+.bin-area{
+    animation:floatBin 5s ease-in-out infinite;
+}
+
+@keyframes floatBin{
+    0%,100%{
+        transform:translate(-50%,-50%) translateY(0);
+    }
+
+    50%{
+        transform:translate(-50%,-50%) translateY(-10px);
+    }
+}
+
+.arrow{
+    animation:pulseArrow 3s ease-in-out infinite;
+}
+
+.arrow-two{
+    animation-delay:1s;
+}
+
+.arrow-three{
+    animation-delay:2s;
+}
+
+@keyframes pulseArrow{
+    0%,100%{opacity:.55;}
+    50%{opacity:1;}
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .waste-title{
+        top:170px;
+        font-size:18vw;
+    }
+
+    .bin-area{
+        transform:translate(-50%,-45%) scale(.8);
+    }
+
+    .right-content{
+        display:none;
+    }
+}
+
+@media(max-width:700px){
+
+    .hero{
+        min-height:900px;
+    }
+
+    .nav-right{
+        display:none;
+    }
+
+    .waste-title{
+        top:150px;
+        font-size:20vw;
+        letter-spacing:-7px;
+    }
+
+    .side-text{
+        display:none;
+    }
+
+    .bin-area{
+        top:42%;
+        transform:translate(-50%,-50%) scale(.65);
+    }
+
+    .hero-copy{
+        left:6%;
+        bottom:140px;
+        width:auto;
+    }
+
+    .hero-copy h2{
+        font-size:38px;
+    }
+
+    .roadmap{
+        grid-template-columns:repeat(2,1fr);
+        bottom:20px;
+    }
+
+    .step:nth-child(3),
+    .step:nth-child(4){
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<nav>
+
+    <div class="logo">
+        <div class="logo-icon">♻</div>
+        Waste<span>Wise</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="LEARN.html">Learn</a>
+        <a href="PLAY.html">Play</a>
+        <a href="ABOUT.html">About</a>
+        <a href="PROGRESS.html">Progress</a>
+    </div>
+
+    <div class="nav-right">
+    <button class="login"
+            onclick="window.location.href='/LOGIN.html'">
+        LOGIN
+    </button>
+</div>
+
+</nav>
+
+<div class="side-text side-left">
+    SMART<br>
+    CHOICES.<br>
+    CLEANER<br>
+    TOMORROW.
+
+    <div class="side-line"></div>
+</div>
+
+<div class="side-text side-right">
+    A GREENER<br>
+    PLANET IS<br>
+    IN YOUR<br>
+    HANDS.
+
+    <div class="side-line"></div>
+</div>
+
+<div class="waste-title">
+    WASTEWISE
+</div>
+
+<div class="bin-area">
+
+    <div class="green-glow"></div>
+
+    <div class="arrow arrow-one"></div>
+    <div class="arrow arrow-two"></div>
+    <div class="arrow arrow-three"></div>
+
+    <div class="bin">
+
+        <div class="recycle-symbol">♻</div>
+
+        <div class="wheel wheel-left"></div>
+        <div class="wheel wheel-right"></div>
+
+    </div>
+
+</div>
+
+<div class="hero-copy">
+
+    <h2>
+        SEE IT.<br>
+        SORT IT.<br>
+        <span>CHANGE IT.</span>
+    </h2>
+
+   
+
+    <button class="enter-button"
+        onclick="window.location.href='/signin.html'">
+
+    <span class="circle">→</span>
+
+    START JOURNEY
+
+</button>
+
+</div>
+
+<div class="right-content">
+
+    <p>
+        Learn. Play. Track.
+        Turn everyday waste decisions
+        into meaningful environmental impact.
+    </p>
+
+</div>
+
+<div class="scroll">
+    SCROLL
+</div>
+
+<div class="roadmap">
+
+    <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-text">LEARN<br>SMARTER</div>
+    </div>
+
+    <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-text">PLAY &<br>DISCOVER</div>
+    </div>
+
+    <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-text">UNDERSTAND<br>IMPACT</div>
+    </div>
+
+    <div class="step">
+        <div class="step-number">04</div>
+        <div class="step-text">TRACK<br>PROGRESS</div>
+    </div>
+
+</div>
+
+</section>
+
+</body>
+</html>

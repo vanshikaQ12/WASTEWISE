@@ -1,0 +1,3188 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WasteWise | Play</title>
+
+<style>
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    background:#050807;
+
+    color:white;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    overflow-x:hidden;
+
+}
+
+/* =========================
+
+   PAGE
+
+========================= */
+
+.page{
+
+    min-height:100vh;
+
+    padding:0 6% 70px;
+
+    background:
+
+        radial-gradient(circle at 50% 10%,rgba(97,255,155,.10),transparent 35%),
+
+        radial-gradient(circle at 80% 70%,rgba(37,110,67,.08),transparent 30%),
+
+        #050807;
+
+}
+
+/* =========================
+
+   NAVIGATION
+
+========================= */
+
+nav{
+
+    height:88px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border-bottom:1px solid rgba(255,255,255,.10);
+
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:24px;
+
+    font-weight:700;
+
+}
+
+.logo-icon{
+
+    color:#61ff9b;
+
+    font-size:29px;
+
+}
+
+.logo span{
+
+    color:#61ff9b;
+
+}
+
+.nav-links{
+
+    display:flex;
+
+    gap:32px;
+
+}
+
+.nav-links a{
+
+    color:rgba(255,255,255,.65);
+
+    text-decoration:none;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    transition:.3s;
+
+}
+
+.nav-links a:hover,
+
+.nav-links a.active{
+
+    color:#61ff9b;
+
+}
+
+/* =========================
+
+   HEADER
+
+========================= */
+
+.heading{
+
+    margin-top:70px;
+
+}
+
+.heading small{
+
+    color:#61ff9b;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+}
+
+.heading h1{
+
+    font-size:70px;
+
+    line-height:.95;
+
+    letter-spacing:-4px;
+
+    margin:15px 0 25px;
+
+}
+
+.heading h1 span{
+
+    color:#61ff9b;
+
+}
+
+.heading p{
+
+    max-width:650px;
+
+    color:rgba(255,255,255,.52);
+
+    font-size:14px;
+
+    line-height:1.8;
+
+}
+
+/* =========================
+
+   GAME CARDS
+
+========================= */
+
+.games{
+
+    margin-top:60px;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+.game{
+
+    position:relative;
+
+    min-height:330px;
+
+    padding:30px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.025);
+
+    overflow:hidden;
+
+    transition:.35s;
+
+}
+
+.game::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    right:-90px;
+
+    top:-90px;
+
+    border-radius:50%;
+
+    background:rgba(97,255,155,.08);
+
+    filter:blur(20px);
+
+}
+
+.game:hover{
+
+    transform:translateY(-7px);
+
+    border-color:rgba(97,255,155,.65);
+
+    box-shadow:
+
+        0 20px 50px rgba(0,0,0,.35),
+
+        0 0 30px rgba(97,255,155,.06);
+
+}
+
+.game-number{
+
+    color:#61ff9b;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+}
+
+.game h2{
+
+    margin-top:45px;
+
+    margin-bottom:15px;
+
+    font-size:27px;
+
+}
+
+.game p{
+
+    color:rgba(255,255,255,.55);
+
+    font-size:13px;
+
+    line-height:1.7;
+
+}
+
+.play-button{
+
+    position:absolute;
+
+    left:30px;
+
+    bottom:28px;
+
+    border:1px solid #61ff9b;
+
+    border-radius:30px;
+
+    padding:11px 24px;
+
+    background:transparent;
+
+    color:white;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.play-button:hover{
+
+    background:#61ff9b;
+
+    color:#061009;
+
+}
+
+/* =========================
+
+   GAME AREA
+
+========================= */
+
+.game-area{
+
+    display:none;
+
+    max-width:950px;
+
+    margin-top:55px;
+
+    animation:fadeIn .4s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* GAME HEADER */
+
+.game-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.game-label{
+
+    color:#61ff9b;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+}
+
+.back-button{
+
+    padding:9px 18px;
+
+    border:1px solid rgba(255,255,255,.3);
+
+    border-radius:25px;
+
+    background:transparent;
+
+    color:white;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.back-button:hover{
+
+    border-color:#61ff9b;
+
+    color:#61ff9b;
+
+}
+
+/* =========================
+
+   GAME BOX
+
+========================= */
+
+.game-box{
+
+    padding:40px;
+
+    min-height:450px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.025);
+
+}
+
+.game-box h2{
+
+    font-size:38px;
+
+    margin-bottom:15px;
+
+}
+
+.game-box h2 span{
+
+    color:#61ff9b;
+
+}
+
+.game-description{
+
+    color:rgba(255,255,255,.52);
+
+    line-height:1.8;
+
+    max-width:700px;
+
+    margin-bottom:35px;
+
+}
+
+/* =========================
+
+   SORT GAME
+
+========================= */
+
+.item-display{
+
+    padding:30px;
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:15px;
+
+    background:rgba(0,0,0,.15);
+
+}
+
+.item-emoji{
+
+    font-size:65px;
+
+    margin-bottom:10px;
+
+}
+
+.item-name{
+
+    font-size:22px;
+
+}
+
+.sort-options{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:15px;
+
+}
+
+.sort-option{
+
+    padding:18px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:12px;
+
+    background:transparent;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.sort-option:hover{
+
+    border-color:#61ff9b;
+
+    color:#61ff9b;
+
+}
+
+.feedback{
+
+    margin-top:25px;
+
+    min-height:25px;
+
+    color:#61ff9b;
+
+    font-size:13px;
+
+}
+
+.sort-score{
+
+    margin-top:20px;
+
+    color:rgba(255,255,255,.5);
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+}
+
+/* =========================
+
+   QUIZ
+
+========================= */
+
+.question-number{
+
+    color:#61ff9b;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    margin-bottom:15px;
+
+}
+
+.question{
+
+    font-size:26px;
+
+    margin-bottom:25px;
+
+}
+
+.quiz-options{
+
+    display:grid;
+
+    gap:12px;
+
+}
+
+.quiz-option{
+
+    text-align:left;
+
+    width:100%;
+
+    padding:16px 20px;
+
+    border:1px solid rgba(255,255,255,.14);
+
+    border-radius:12px;
+
+    background:transparent;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.quiz-option:hover{
+
+    border-color:#61ff9b;
+
+}
+
+.quiz-option.correct{
+
+    border-color:#61ff9b;
+
+    background:rgba(97,255,155,.08);
+
+}
+
+.quiz-option.wrong{
+
+    border-color:#ff6b6b;
+
+    background:rgba(255,107,107,.08);
+
+}
+
+.quiz-feedback{
+
+    margin-top:20px;
+
+    min-height:25px;
+
+    font-size:13px;
+
+}
+
+.quiz-next{
+
+    margin-top:25px;
+
+    padding:11px 23px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#61ff9b;
+
+    color:#061009;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    display:none;
+
+}
+
+/* =========================
+
+   DECISION GAME
+
+========================= */
+
+.decision-card{
+
+    padding:30px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:15px;
+
+    background:rgba(0,0,0,.15);
+
+    margin-bottom:25px;
+
+}
+
+.decision-card h3{
+
+    font-size:22px;
+
+    margin-bottom:15px;
+
+}
+
+.decision-card p{
+
+    color:rgba(255,255,255,.55);
+
+    line-height:1.7;
+
+}
+
+.decision-options{
+
+    display:grid;
+
+    gap:12px;
+
+}
+
+.decision-option{
+
+    padding:17px 20px;
+
+    border:1px solid rgba(255,255,255,.14);
+
+    border-radius:12px;
+
+    background:transparent;
+
+    color:white;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.decision-option:hover{
+
+    border-color:#61ff9b;
+
+}
+
+.decision-feedback{
+
+    margin-top:20px;
+
+    min-height:25px;
+
+    color:#61ff9b;
+
+}
+
+/* =========================
+
+   SCORE
+
+========================= */
+
+.score-bar{
+
+    margin-top:45px;
+
+    padding:22px 28px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:15px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:rgba(255,255,255,.02);
+
+}
+
+.score-bar span{
+
+    color:rgba(255,255,255,.5);
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+}
+
+.score-bar strong{
+
+    color:#61ff9b;
+
+    font-size:28px;
+
+}
+
+/* =========================
+
+   COMPLETE SCREEN
+
+========================= */
+
+.complete-screen{
+
+    display:none;
+
+    text-align:center;
+
+    padding:50px 20px;
+
+}
+
+.complete-icon{
+
+    font-size:65px;
+
+    color:#61ff9b;
+
+    margin-bottom:20px;
+
+}
+
+.complete-screen h2{
+
+    font-size:38px;
+
+    margin-bottom:15px;
+
+}
+
+.complete-screen p{
+
+    color:rgba(255,255,255,.55);
+
+    line-height:1.7;
+
+    max-width:500px;
+
+    margin:0 auto 25px;
+
+}
+
+.complete-button{
+
+    padding:12px 25px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#61ff9b;
+
+    color:#061009;
+
+    cursor:pointer;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+}
+
+/* =========================
+
+   RESPONSIVE
+
+========================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+
+        display:none;
+
+    }
+
+    .games{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .heading h1{
+
+        font-size:52px;
+
+    }
+
+    .sort-options{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .page{
+
+        padding:0 5% 50px;
+
+    }
+
+    nav{
+
+        height:75px;
+
+    }
+
+    .heading{
+
+        margin-top:50px;
+
+    }
+
+    .heading h1{
+
+        font-size:42px;
+
+    }
+
+    .game-box{
+
+        padding:25px;
+
+    }
+
+    .game-box h2{
+
+        font-size:30px;
+
+    }
+
+    .game-top{
+
+        align-items:flex-start;
+
+        gap:20px;
+
+    }
+
+}
+
+/* =========================
+
+   WASTEWISE DAILY SORT
+
+========================= */
+
+.wwds-wrap {
+
+    max-width: 1100px;
+
+    margin: 45px auto;
+
+    padding: 24px;
+
+    color: #f4fff7;
+
+}
+
+.wwds-card {
+
+    padding: 32px;
+
+    border: 1px solid rgba(97, 255, 155, 0.2);
+
+    border-radius: 24px;
+
+    background: linear-gradient(145deg, #0b1910, #07100b);
+
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+
+}
+
+.wwds-kicker {
+
+    color: #61ff9b;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    font-weight: bold;
+
+}
+
+.wwds-card h2 {
+
+    margin: 12px 0;
+
+}
+
+.wwds-title {
+
+    margin: 16px 0;
+
+    font-size: clamp(28px, 5vw, 46px);
+
+}
+
+.wwds-description,
+
+.wwds-note {
+
+    color: rgba(255, 255, 255, 0.66);
+
+    line-height: 1.7;
+
+}
+
+.wwds-form {
+
+    margin-top: 25px;
+
+}
+
+
+
+
+.wwds-button {
+
+    margin-top: 20px;
+
+    padding: 14px 22px;
+
+    border: 0;
+
+    border-radius: 30px;
+
+    background: #61ff9b;
+
+    color: #061009;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+.wwds-button:disabled {
+
+    opacity: 0.6;
+
+    cursor: wait;
+
+}
+
+.wwds-status {
+
+    margin-top: 16px;
+
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+
+}
+
+.wwds-results {
+
+    margin-top: 35px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+}
+
+.wwds-result-grid {
+
+    display: grid;
+
+    grid-template-columns: minmax(180px, 260px) 1fr;
+
+    align-items: center;
+
+    gap: 30px;
+
+    margin: 25px 0;
+
+}
+
+.wwds-pie {
+
+    width: min(100%, 250px);
+
+    aspect-ratio: 1;
+
+    margin: 0 auto;
+
+    border-radius: 50%;
+
+    background: #203b2a;
+
+    border: 5px solid rgba(255, 255, 255, 0.08);
+
+}
+
+.wwds-legend {
+
+    display: grid;
+
+    gap: 13px;
+
+}
+
+.wwds-legend-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+.wwds-swatch {
+
+    width: 13px;
+
+    height: 13px;
+
+    flex: 0 0 13px;
+
+    border-radius: 4px;
+
+}
+
+.wwds-category {
+
+    flex: 1;
+
+}
+
+.wwds-feedback {
+
+    margin-top: 20px;
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    background: rgba(97, 255, 155, 0.06);
+
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+
+}
+
+@media (max-width: 600px) {
+
+    .wwds-wrap {
+
+        padding: 15px;
+
+    }
+
+    .wwds-card {
+
+        padding: 22px;
+
+    }
+
+    .wwds-result-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .wwds-pie {
+
+        width: min(100%, 220px);
+
+    }
+
+}
+
+/* =========================
+
+   SINGLE GAME PLAY PAGE
+
+========================= */
+
+.page {
+
+    min-height: auto;
+
+    padding-bottom: 0;
+
+}
+
+/* Hide the old three-game menu and its game area */
+
+#gameSelection,
+
+#gameCards,
+
+#gameArea,
+
+.score-bar {
+
+    display: none !important;
+
+}
+
+/* Make Daily Sort the main page experience */
+
+.wwds-wrap {
+
+    width: 100%;
+
+    max-width: 1440px;
+
+    min-height: calc(100vh - 88px);
+
+    margin: 0 auto;
+
+    padding: 38px 6% 70px;
+
+}
+
+.wwds-card {
+
+    position: relative;
+
+    isolation: isolate;
+
+    overflow: hidden;
+
+    width: 100%;
+
+    padding: clamp(26px, 4vw, 55px);
+
+    border: 1px solid rgba(97, 255, 155, 0.25);
+
+    border-radius: 28px;
+
+    background:
+
+        radial-gradient(
+
+            circle at 90% 5%,
+
+            rgba(97, 255, 155, 0.12),
+
+            transparent 35%
+
+        ),
+
+        linear-gradient(145deg, #0c1910, #07100b);
+
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
+
+}
+
+.wwds-kicker {
+
+    position: relative;
+
+    z-index: 1;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 10px 15px;
+
+    border: 1px solid rgba(97, 255, 155, 0.3);
+
+    border-radius: 30px;
+
+    background: rgba(97, 255, 155, 0.07);
+
+    color: #61ff9b;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+
+}
+
+.wwds-title {
+
+    max-width: 900px;
+
+    margin: 25px 0 20px;
+
+    font-size: clamp(38px, 6vw, 76px);
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    overflow-wrap: anywhere;
+
+}
+
+.wwds-description {
+
+    max-width: 760px;
+
+    font-size: clamp(15px, 1.5vw, 18px);
+
+    line-height: 1.8;
+
+    color: rgba(255, 255, 255, 0.65);
+
+}
+
+/* Gamified mission information */
+
+.wwds-mission-stats {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin: 30px 0;
+
+}
+
+.wwds-stat {
+
+    padding: 20px;
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+}
+
+.wwds-stat span {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #61ff9b;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+}
+
+.wwds-stat strong {
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+}
+
+/* Daily Sort demo panel */
+
+.wwds-form {
+
+    margin-top: 28px;
+
+    padding: clamp(20px, 3vw, 32px);
+
+    border: 1px dashed rgba(97, 255, 155, 0.4);
+
+    border-radius: 20px;
+
+    background: rgba(0, 0, 0, 0.16);
+
+}
+
+
+
+
+.wwds-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 52px;
+
+    margin-top: 22px;
+
+    padding: 15px 28px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: #61ff9b;
+
+    color: #061009;
+
+    font-weight: 800;
+
+    font-size: 12px;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition: transform 0.2s, box-shadow 0.2s;
+
+}
+
+.wwds-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 30px rgba(97, 255, 155, 0.2);
+
+}
+
+.wwds-button:disabled {
+
+    opacity: 0.6;
+
+    cursor: wait;
+
+    transform: none;
+
+}
+
+.wwds-status {
+
+    margin-top: 18px;
+
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+
+}
+
+.wwds-results {
+
+    margin-top: 35px;
+
+    padding-top: 30px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+}
+
+.wwds-result-grid {
+
+    display: grid;
+
+    grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 35px;
+
+    margin: 30px 0;
+
+}
+
+.wwds-pie {
+
+    width: min(100%, 250px);
+
+    aspect-ratio: 1;
+
+    margin: 0 auto;
+
+    border: 5px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 50%;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+
+}
+
+.wwds-legend {
+
+    display: grid;
+
+    gap: 16px;
+
+}
+
+.wwds-legend-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+.wwds-swatch {
+
+    width: 13px;
+
+    height: 13px;
+
+    flex: 0 0 13px;
+
+    border-radius: 4px;
+
+}
+
+.wwds-category {
+
+    flex: 1;
+
+}
+
+.wwds-feedback {
+
+    margin-top: 24px;
+
+    padding: 22px;
+
+    border: 1px solid rgba(97, 255, 155, 0.14);
+
+    border-radius: 16px;
+
+    background: rgba(97, 255, 155, 0.045);
+
+    line-height: 1.8;
+
+    overflow-wrap: anywhere;
+
+}
+
+.wwds-feedback strong {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #61ff9b;
+
+}
+
+@media (max-width: 650px) {
+
+    .wwds-wrap {
+
+        padding: 24px 5% 45px;
+
+    }
+
+    .wwds-card {
+
+        padding: 24px;
+
+        border-radius: 20px;
+
+    }
+
+    .wwds-title {
+
+        letter-spacing: -1.5px;
+
+    }
+
+    .wwds-mission-stats {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .wwds-result-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .wwds-pie {
+
+        width: min(100%, 220px);
+
+    }
+
+}
+
+.wwds-button.wwds-demo-button {
+
+    background: transparent;
+
+    color: #61ff9b;
+
+    border: 1px solid #61ff9b;
+
+    margin-left: 10px;
+
+}
+
+@media (max-width: 520px) {
+
+    .wwds-button.wwds-demo-button {
+
+        margin-left: 0;
+
+        width: 100%;
+
+    }
+
+}
+.wwds-file-label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+.wwds-file-picker {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(97, 255, 155, 0.25);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.wwds-file-picker::file-selector-button {
+    padding: 10px 16px;
+    margin-right: 12px;
+    border: none;
+    border-radius: 20px;
+    background: #61ff9b;
+    color: #061009;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+<!-- =========================
+
+     NAVIGATION
+
+========================= -->
+
+<nav>
+
+    <div class="logo">
+
+        <div class="logo-icon">♻</div>
+
+        Waste<span>Wise</span>
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="LEARN.html">
+
+            Learn
+
+        </a>
+
+        <a href="PLAY.html" class="active">
+
+            Play
+
+        </a>
+
+        <a href="ABOUT.html">
+
+            About
+
+        </a>
+
+        <a href="PROGRESS.html">
+
+            Progress
+
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- =========================
+
+     GAME SELECTION
+
+========================= -->
+
+<section class="heading" id="gameSelection">
+
+    <small>PLAY</small>
+
+    <h1>
+
+        LEARN.<br>
+
+        <span>PLAY.</span><br>
+
+        IMPACT.
+
+    </h1>
+
+    <p>
+
+        Test your knowledge, make smarter waste
+
+        decisions and earn points along the way.
+
+        Every challenge is designed to make
+
+        sustainability more interactive.
+
+    </p>
+
+</section>
+
+<section class="games" id="gameCards">
+
+    <!-- SORT IT -->
+
+    <div class="game">
+
+        <div class="game-number">
+
+            CHALLENGE 01
+
+        </div>
+
+        <h2>
+
+            SORT IT!
+
+        </h2>
+
+        <p>
+
+            A waste item will appear on screen.
+
+            Decide which category it belongs to.
+
+        </p>
+
+        <button
+
+            class="play-button"
+
+            onclick="startSortGame()">
+
+            PLAY →
+
+        </button>
+
+    </div>
+
+    <!-- QUIZ -->
+
+    <div class="game">
+
+        <div class="game-number">
+
+            CHALLENGE 02
+
+        </div>
+
+        <h2>
+
+            QUICK QUIZ
+
+        </h2>
+
+        <p>
+
+            Answer environmental questions and
+
+            test how much you really know.
+
+        </p>
+
+        <button
+
+            class="play-button"
+
+            onclick="startQuiz()">
+
+            START →
+
+        </button>
+
+    </div>
+
+    <!-- DECISION -->
+
+    <div class="game">
+
+        <div class="game-number">
+
+            CHALLENGE 03
+
+        </div>
+
+        <h2>
+
+            WASTE DECISION
+
+        </h2>
+
+        <p>
+
+            Face everyday waste situations and
+
+            choose the most responsible option.
+
+        </p>
+
+        <button
+
+            class="play-button"
+
+            onclick="startDecisionGame()">
+
+            BEGIN →
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- =========================
+
+     GAME AREA
+
+========================= -->
+
+<section class="game-area" id="gameArea">
+
+    <div class="game-top">
+
+        <div class="game-label" id="gameLabel">
+
+            CHALLENGE
+
+        </div>
+
+        <button
+
+            class="back-button"
+
+            onclick="backToGames()">
+
+            ← BACK
+
+        </button>
+
+    </div>
+
+    <div class="game-box" id="gameBox">
+
+        <!-- CONTENT INSERTED BY JAVASCRIPT -->
+
+    </div>
+
+</section>
+
+<!-- =========================
+
+     TOTAL SCORE
+
+========================= -->
+
+<section class="score-bar">
+
+    <span>
+
+        YOUR WASTEWISE SCORE
+
+    </span>
+
+    <strong id="totalScore">
+
+        0
+
+    </strong>
+
+</section>
+
+</div>
+
+<script>
+
+/* =====================================================
+
+   GLOBAL SCORE
+
+===================================================== */
+
+let totalScore =
+
+    Number(localStorage.getItem("wastewiseScore")) || 0;
+
+document.getElementById("totalScore").textContent =
+
+    totalScore;
+
+/* =====================================================
+
+   ADD SCORE
+
+===================================================== */
+
+function wasteWiseLocalDateKey(date = new Date()) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
+/*
+   Record a streak day when Play awards positive points.
+   Multiple correct answers on the same day count as one active day.
+*/
+function recordWasteWiseStreakActivity() {
+    const today = new Date();
+    const todayKey = wasteWiseLocalDateKey(today);
+    const lastActivityKey = localStorage.getItem("wastewiseLastActivityDate");
+
+    if (lastActivityKey === todayKey) {
+        return;
+    }
+
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayKey = wasteWiseLocalDateKey(yesterday);
+    const previousStreak = Number(localStorage.getItem("wastewiseStreak")) || 0;
+
+    const nextStreak = lastActivityKey === yesterdayKey
+        ? previousStreak + 1
+        : 1;
+
+    localStorage.setItem("wastewiseStreak", String(nextStreak));
+    localStorage.setItem("wastewiseLastActivityDate", todayKey);
+}
+
+function addPoints(points){
+
+    totalScore += points;
+
+    localStorage.setItem(
+
+        "wastewiseScore",
+
+        totalScore
+
+    );
+
+    if (Number(points) > 0) {
+        recordWasteWiseStreakActivity();
+    }
+
+    document.getElementById("totalScore").textContent =
+
+        totalScore;
+
+}
+
+/* =====================================================
+
+   SHOW GAME
+
+===================================================== */
+
+function showGame(label, content){
+
+    document.getElementById("gameSelection").style.display =
+
+        "none";
+
+    document.getElementById("gameCards").style.display =
+
+        "none";
+
+    document.getElementById("gameArea").style.display =
+
+        "block";
+
+    document.getElementById("gameLabel").textContent =
+
+        label;
+
+    document.getElementById("gameBox").innerHTML =
+
+        content;
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+/* =====================================================
+
+   1. SORT IT GAME
+
+===================================================== */
+
+const sortQuestions = [
+
+    {
+
+        emoji:"🍌",
+
+        name:"BANANA PEEL",
+
+        correct:"Organic",
+
+        options:[
+
+            "Organic",
+
+            "Plastic",
+
+            "E-Waste"
+
+        ]
+
+    },
+
+    {
+
+        emoji:"📱",
+
+        name:"OLD MOBILE PHONE",
+
+        correct:"E-Waste",
+
+        options:[
+
+            "Organic",
+
+            "E-Waste",
+
+            "Paper"
+
+        ]
+
+    },
+
+    {
+
+        emoji:"🥤",
+
+        name:"PLASTIC BOTTLE",
+
+        correct:"Plastic",
+
+        options:[
+
+            "Glass",
+
+            "Plastic",
+
+            "Organic"
+
+        ]
+
+    },
+
+    {
+
+        emoji:"📦",
+
+        name:"CARDBOARD BOX",
+
+        correct:"Paper",
+
+        options:[
+
+            "E-Waste",
+
+            "Organic",
+
+            "Paper"
+
+        ]
+
+    }
+
+];
+
+let sortIndex = 0;
+
+let sortPoints = 0;
+
+let sortAnswered = false;
+
+function startSortGame(){
+
+    sortIndex = 0;
+
+    sortPoints = 0;
+
+    showSortQuestion();
+
+}
+
+function showSortQuestion(){
+
+    const item =
+
+        sortQuestions[sortIndex];
+
+    sortAnswered = false;
+
+    let optionsHTML = "";
+
+    item.options.forEach(option => {
+
+        optionsHTML += `
+
+            <button
+
+                class="sort-option"
+
+                onclick="checkSortAnswer('${option}')">
+
+                ${option}
+
+            </button>
+
+        `;
+
+    });
+
+    document.getElementById("gameLabel").textContent =
+
+        "CHALLENGE 01 / SORT IT";
+
+    document.getElementById("gameBox").innerHTML = `
+
+        <h2>
+
+            SORT <span>IT!</span>
+
+        </h2>
+
+        <p class="game-description">
+
+            Where does this item belong?
+
+            Choose the correct category.
+
+        </p>
+
+        <div class="item-display">
+
+            <div class="item-emoji">
+
+                ${item.emoji}
+
+            </div>
+
+            <div class="item-name">
+
+                ${item.name}
+
+            </div>
+
+        </div>
+
+        <div class="sort-options">
+
+            ${optionsHTML}
+
+        </div>
+
+        <div
+
+            class="feedback"
+
+            id="sortFeedback">
+
+        </div>
+
+        <div class="sort-score">
+
+            ROUND SCORE:
+
+            <span id="sortScore">
+
+                ${sortPoints}
+
+            </span>
+
+        </div>
+
+    `;
+
+}
+
+function checkSortAnswer(answer){
+
+    if(sortAnswered){
+
+        return;
+
+    }
+
+    sortAnswered = true;
+
+    const item =
+
+        sortQuestions[sortIndex];
+
+    const feedback =
+
+        document.getElementById("sortFeedback");
+
+    if(answer === item.correct){
+
+        sortPoints += 10;
+
+        addPoints(10);
+
+        feedback.innerHTML =
+
+            "✓ CORRECT! +10 POINTS";
+
+    }else{
+
+        feedback.innerHTML =
+
+            "✗ NOT QUITE. The correct answer is " +
+
+            item.correct + ".";
+
+    }
+
+    setTimeout(() => {
+
+        sortIndex++;
+
+        if(sortIndex < sortQuestions.length){
+
+            showSortQuestion();
+
+        }else{
+
+            showSortComplete();
+
+        }
+
+    },1200);
+
+}
+
+function showSortComplete(){
+
+    document.getElementById("gameBox").innerHTML = `
+
+        <div class="complete-screen"
+
+             style="display:block">
+
+            <div class="complete-icon">
+
+                ♻
+
+            </div>
+
+            <h2>
+
+                GREAT <span>JOB!</span>
+
+            </h2>
+
+            <p>
+
+                You completed the Sort It challenge.
+
+                You earned ${sortPoints} points.
+
+            </p>
+
+            <button
+
+                class="complete-button"
+
+                onclick="startSortGame()">
+
+                PLAY AGAIN
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+/* =====================================================
+
+   2. QUICK QUIZ
+
+===================================================== */
+
+const quizQuestions = [
+
+    {
+
+        question:
+
+            "What is the first step toward better waste management?",
+
+        options:[
+
+            "Mix all waste together",
+
+            "Reduce and manage waste responsibly",
+
+            "Throw everything away"
+
+        ],
+
+        correct:1
+
+    },
+
+    {
+
+        question:
+
+            "Which material can commonly be recycled?",
+
+        options:[
+
+            "Paper",
+
+            "Food scraps mixed with plastic",
+
+            "Used tissues"
+
+        ],
+
+        correct:0
+
+    },
+
+    {
+
+        question:
+
+            "Why is waste segregation important?",
+
+        options:[
+
+            "It makes waste harder to process",
+
+            "It helps separate materials for appropriate handling",
+
+            "It increases the amount of mixed waste"
+
+        ],
+
+        correct:1
+
+    },
+
+    {
+
+        question:
+
+            "Which option should generally be considered before throwing an item away?",
+
+        options:[
+
+            "Reuse or repair it",
+
+            "Immediately burn it",
+
+            "Mix it with all other waste"
+
+        ],
+
+        correct:0
+
+    }
+
+];
+
+let quizIndex = 0;
+
+let quizScore = 0;
+
+let quizAnswered = false;
+
+function startQuiz(){
+
+    quizIndex = 0;
+
+    quizScore = 0;
+
+    showQuizQuestion();
+
+}
+
+function showQuizQuestion(){
+
+    quizAnswered = false;
+
+    const q =
+
+        quizQuestions[quizIndex];
+
+    let optionsHTML = "";
+
+    q.options.forEach((option,index) => {
+
+        optionsHTML += `
+
+            <button
+
+                class="quiz-option"
+
+                onclick="checkQuizAnswer(${index},this)">
+
+                ${option}
+
+            </button>
+
+        `;
+
+    });
+
+    document.getElementById("gameLabel").textContent =
+
+        "CHALLENGE 02 / QUICK QUIZ";
+
+    document.getElementById("gameBox").innerHTML = `
+
+        <div class="question-number">
+
+            QUESTION ${quizIndex + 1}
+
+            OF
+
+            ${quizQuestions.length}
+
+        </div>
+
+        <h2>
+
+            QUICK <span>QUIZ.</span>
+
+        </h2>
+
+        <p class="question">
+
+            ${q.question}
+
+        </p>
+
+        <div class="quiz-options">
+
+            ${optionsHTML}
+
+        </div>
+
+        <div
+
+            class="quiz-feedback"
+
+            id="quizFeedback">
+
+        </div>
+
+        <button
+
+            class="quiz-next"
+
+            id="quizNext"
+
+            onclick="nextQuizQuestion()">
+
+            NEXT →
+
+        </button>
+
+    `;
+
+}
+
+function checkQuizAnswer(index,button){
+
+    if(quizAnswered){
+
+        return;
+
+    }
+
+    quizAnswered = true;
+
+    const q =
+
+        quizQuestions[quizIndex];
+
+    const buttons =
+
+        document.querySelectorAll(".quiz-option");
+
+    buttons.forEach(btn => {
+
+        btn.disabled = true;
+
+    });
+
+    if(index === q.correct){
+
+        button.classList.add("correct");
+
+        quizScore += 10;
+
+        addPoints(10);
+
+        document.getElementById("quizFeedback").innerHTML =
+
+            "✓ CORRECT! +10 POINTS";
+
+    }else{
+
+        button.classList.add("wrong");
+
+        buttons[q.correct].classList.add("correct");
+
+        document.getElementById("quizFeedback").innerHTML =
+
+            "✗ INCORRECT. The correct answer is: " +
+
+            q.options[q.correct];
+
+    }
+
+    document.getElementById("quizNext").style.display =
+
+        "inline-block";
+
+}
+
+function nextQuizQuestion(){
+
+    quizIndex++;
+
+    if(quizIndex < quizQuestions.length){
+
+        showQuizQuestion();
+
+    }else{
+
+        showQuizComplete();
+
+    }
+
+}
+
+function showQuizComplete(){
+
+    document.getElementById("gameBox").innerHTML = `
+
+        <div class="complete-screen"
+
+             style="display:block">
+
+            <div class="complete-icon">
+
+                ★
+
+            </div>
+
+            <h2>
+
+                QUIZ <span>COMPLETE!</span>
+
+            </h2>
+
+            <p>
+
+                You scored ${quizScore}
+
+                out of
+
+                ${quizQuestions.length * 10}
+
+                points.
+
+            </p>
+
+            <button
+
+                class="complete-button"
+
+                onclick="startQuiz()">
+
+                TRY AGAIN
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+/* =====================================================
+
+   3. WASTE DECISION GAME
+
+===================================================== */
+
+const decisions = [
+
+    {
+
+        situation:
+
+            "You have an old T-shirt that you no longer wear.",
+
+        options:[
+
+            {
+
+                text:"Reuse, donate or repurpose it",
+
+                points:10,
+
+                result:"Great choice! Extending the life of an item can reduce unnecessary waste."
+
+            },
+
+            {
+
+                text:"Throw it away immediately",
+
+                points:0,
+
+                result:"There may be better options before disposal."
+
+            }
+
+        ]
+
+    },
+
+    {
+
+        situation:
+
+            "You finish drinking from a plastic bottle.",
+
+        options:[
+
+            {
+
+                text:"Separate it appropriately and recycle where accepted",
+
+                points:10,
+
+                result:"Good choice! Proper separation helps recyclable materials be handled appropriately."
+
+            },
+
+            {
+
+                text:"Throw it into mixed waste without checking",
+
+                points:0,
+
+                result:"Try checking whether your local system accepts the bottle for recycling."
+
+            }
+
+        ]
+
+    },
+
+    {
+
+        situation:
+
+            "You have leftover food after a meal.",
+
+        options:[
+
+            {
+
+                text:"Store it safely for later or use it appropriately",
+
+                points:10,
+
+                result:"Good thinking! Avoiding unnecessary food waste is an important habit."
+
+            },
+
+            {
+
+                text:"Throw it away even though it can still be safely used",
+
+                points:0,
+
+                result:"Consider whether the food can be safely saved or reused."
+
+            }
+
+        ]
+
+    },
+
+    {
+
+        situation:
+
+            "Your phone charger no longer works.",
+
+        options:[
+
+            {
+
+                text:"Take it to an appropriate e-waste collection point",
+
+                points:10,
+
+                result:"Correct! Electronic items may require specialised collection and handling."
+
+            },
+
+            {
+
+                text:"Put it into ordinary mixed waste",
+
+                points:0,
+
+                result:"Electronic items should be handled through appropriate e-waste systems where available."
+
+            }
+
+        ]
+
+    }
+
+];
+
+let decisionIndex = 0;
+
+let decisionScore = 0;
+
+let decisionAnswered = false;
+
+function startDecisionGame(){
+
+    decisionIndex = 0;
+
+    decisionScore = 0;
+
+    showDecision();
+
+}
+
+function showDecision(){
+
+    decisionAnswered = false;
+
+    const decision =
+
+        decisions[decisionIndex];
+
+    let optionsHTML = "";
+
+    decision.options.forEach((option,index) => {
+
+        optionsHTML += `
+
+            <button
+
+                class="decision-option"
+
+                onclick="chooseDecision(${index})">
+
+                ${option.text}
+
+            </button>
+
+        `;
+
+    });
+
+    document.getElementById("gameLabel").textContent =
+
+        "CHALLENGE 03 / WASTE DECISION";
+
+    document.getElementById("gameBox").innerHTML = `
+
+        <h2>
+
+            MAKE THE <span>CHOICE.</span>
+
+        </h2>
+
+        <p class="game-description">
+
+            Scenario ${decisionIndex + 1}
+
+            of ${decisions.length}
+
+        </p>
+
+        <div class="decision-card">
+
+            <h3>
+
+                WHAT WOULD YOU DO?
+
+            </h3>
+
+            <p>
+
+                ${decision.situation}
+
+            </p>
+
+        </div>
+
+        <div class="decision-options">
+
+            ${optionsHTML}
+
+        </div>
+
+        <div
+
+            class="decision-feedback"
+
+            id="decisionFeedback">
+
+        </div>
+
+    `;
+
+}
+
+function chooseDecision(index){
+
+    if(decisionAnswered){
+
+        return;
+
+    }
+
+    decisionAnswered = true;
+
+    const decision =
+
+        decisions[decisionIndex];
+
+    const choice =
+
+        decision.options[index];
+
+    if(choice.points > 0){
+
+        decisionScore += choice.points;
+
+        addPoints(choice.points);
+
+    }
+
+    document.getElementById("decisionFeedback").innerHTML =
+
+        "✓ " +
+
+        choice.result +
+
+        " +" +
+
+        choice.points +
+
+        " POINTS";
+
+    setTimeout(() => {
+
+        decisionIndex++;
+
+        if(decisionIndex < decisions.length){
+
+            showDecision();
+
+        }else{
+
+            showDecisionComplete();
+
+        }
+
+    },1800);
+
+}
+
+function showDecisionComplete(){
+
+    document.getElementById("gameBox").innerHTML = `
+
+        <div class="complete-screen"
+
+             style="display:block">
+
+            <div class="complete-icon">
+
+                ✓
+
+            </div>
+
+            <h2>
+
+                DECISION <span>COMPLETE!</span>
+
+            </h2>
+
+            <p>
+
+                You earned ${decisionScore}
+
+                points in the Waste Decision challenge.
+
+            </p>
+
+            <button
+
+                class="complete-button"
+
+                onclick="startDecisionGame()">
+
+                PLAY AGAIN
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+/* =====================================================
+
+   BACK TO GAME SELECTION
+
+===================================================== */
+
+function backToGames(){
+
+    document.getElementById("gameSelection").style.display =
+
+        "block";
+
+    document.getElementById("gameCards").style.display =
+
+        "grid";
+
+    document.getElementById("gameArea").style.display =
+
+        "none";
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+</script>
+
+<section class="wwds-wrap" id="dailySortGame">
+    <div class="wwds-card">
+        <div class="wwds-kicker">GAME 01 · DAILY SORT</div>
+
+        <h1 class="wwds-title">Sort it. Learn it. Sustain it.</h1>
+
+        <p class="wwds-description">
+            Explore an example waste-composition chart, learn simple sorting tips,
+            and build greener habits one day at a time.
+        </p>
+
+        <div class="wwds-mission-stats">
+            <div class="wwds-stat">
+                <span>YOUR MISSION</span>
+                <strong>01 / DAILY SORT</strong>
+            </div>
+            <div class="wwds-stat">
+                <span>GAME MODE</span>
+                <strong>SAMPLE DEMO</strong>
+            </div>
+            <div class="wwds-stat">
+                <span>TODAY'S GOAL</span>
+                <strong>SORT · LEARN · IMPACT</strong>
+            </div>
+        </div>
+
+        <div class="wwds-form">
+            <h2>Ready to explore a sample?</h2>
+            <p class="wwds-note">
+                Open the sample report to see how waste categories can be presented.
+                This demo uses example data only. No photo upload, AI analysis, API call,
+                or paid credits are needed.
+            </p>
+             html
+<label for="wwdsFile" class="wwds-file-label">
+    CHOOSE A WASTE PHOTO
+</label>
+
+<input
+    type="file"
+    id="wwdsFile"
+    name="wastePhoto"
+    accept="image/*"
+    class="wwds-file-picker"
+>
+
+<p id="wwdsFileName" class="wwds-note">
+    No file selected
+</p>
+            <button type="button" id="wwdsDemo" class="wwds-button wwds-demo-button">
+                VIEW SAMPLE DEMO
+            </button>
+        </div>
+
+        <p id="wwdsStatus" class="wwds-status" role="status" aria-live="polite">
+            Select VIEW SAMPLE DEMO to display the example chart.
+        </p>
+
+        <section id="wwdsResults" class="wwds-results" hidden>
+            <div class="wwds-kicker">SAMPLE WASTE SNAPSHOT</div>
+            <h2>What could a waste mix look like?</h2>
+            <p id="wwdsSummary" class="wwds-description"></p>
+
+            <div class="wwds-result-grid">
+                <div
+                    id="wwdsPie"
+                    class="wwds-pie"
+                    role="img"
+                    aria-label="Sample waste composition pie chart">
+                </div>
+                <div id="wwdsLegend" class="wwds-legend"></div>
+            </div>
+
+            <div class="wwds-feedback">
+                <strong>SORTING TIP</strong>
+                <p id="wwdsFeedback"></p>
+            </div>
+
+            <p class="wwds-note">
+                These percentages are illustrative sample data for the demo only.
+                They are not based on a real photo or a measured waste sample.
+            </p>
+        </section>
+    </div>
+</section>
+
+<script>
+(function () {
+    "use strict";
+
+    const demoButton = document.getElementById("wwdsDemo");
+    const fileInput = document.getElementById("wwdsFile");
+const fileName = document.getElementById("wwdsFileName");
+
+fileInput.addEventListener("change", function () {
+    const file = this.files[0];
+
+    fileName.textContent = file
+         "Selected: " + file.name
+        "No file selected";
+});
+    const status = document.getElementById("wwdsStatus");
+    const results = document.getElementById("wwdsResults");
+    const pie = document.getElementById("wwdsPie");
+    const legend = document.getElementById("wwdsLegend");
+    const summary = document.getElementById("wwdsSummary");
+    const feedback = document.getElementById("wwdsFeedback");
+
+    const colors = {
+        "Organic waste": "#54d68c",
+        "Plastic": "#4d9de0",
+        "Paper/cardboard": "#f4d35e",
+        "Glass/metal": "#a78bfa",
+        "Other waste": "#f28c8c"
+    };
+
+    const sampleCategories = [
+        { name: "Organic waste", percentage: 25 },
+        { name: "Plastic", percentage: 35 },
+        { name: "Paper/cardboard", percentage: 15 },
+        { name: "Glass/metal", percentage: 10 },
+        { name: "Other waste", percentage: 15 }
+    ];
+
+    function showSampleDemo() {
+        status.textContent =
+            "DEMO MODE: Sample results only. No photo was uploaded or analyzed, and no API call was made.";
+
+        summary.textContent =
+            "This example shows one way to visualize the types of waste that may be sorted separately.";
+
+        feedback.textContent =
+            "Keep food scraps separate from dry recyclables. Clean and sort recyclable items according to your local collection rules, and check local guidance for glass, metal, and other waste.";
+
+        let cumulative = 0;
+        const slices = sampleCategories.map(function (item) {
+            const start = cumulative;
+            cumulative += item.percentage;
+            return colors[item.name] + " " + start + "% " + cumulative + "%";
+        });
+
+        pie.style.background = "conic-gradient(" + slices.join(", ") + ")";
+        pie.setAttribute(
+            "aria-label",
+            "Sample waste composition: " + sampleCategories.map(function (item) {
+                return item.name + " " + item.percentage + " percent";
+            }).join(", ")
+        );
+
+        legend.replaceChildren();
+        sampleCategories.forEach(function (item) {
+            const row = document.createElement("div");
+            row.className = "wwds-legend-row";
+
+            const swatch = document.createElement("span");
+            swatch.className = "wwds-swatch";
+            swatch.style.background = colors[item.name];
+
+            const label = document.createElement("span");
+            label.className = "wwds-category";
+            label.textContent = item.name;
+
+            const percentage = document.createElement("strong");
+            percentage.textContent = item.percentage + "%";
+
+            row.append(swatch, label, percentage);
+            legend.appendChild(row);
+        });
+
+        results.hidden = false;
+        results.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    demoButton.addEventListener("click", showSampleDemo);
+})();
+</script>
+
+</body>
+
+</html>

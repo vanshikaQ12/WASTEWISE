@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WasteWise | Login</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+
+    background:
+        radial-gradient(circle at 50% 45%, rgba(50,220,110,.13), transparent 32%),
+        radial-gradient(circle at 50% 100%, rgba(24,75,45,.18), transparent 40%),
+        #050807;
+
+    color:white;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+/* BACKGROUND GRID */
+
+body::before{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    opacity:.07;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+
+    background-size:70px 70px;
+
+    pointer-events:none;
+}
+
+/* =========================
+   LOGIN WRAPPER
+========================= */
+
+.login-wrapper{
+    width:100%;
+    max-width:1050px;
+
+    min-height:650px;
+
+    margin:30px;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.025);
+
+    backdrop-filter:blur(15px);
+
+    overflow:hidden;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.5),
+        0 0 60px rgba(97,255,155,.04);
+}
+
+/* =========================
+   LEFT SIDE
+========================= */
+
+.login-visual{
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:50px;
+
+    background:
+        radial-gradient(circle at center,
+        rgba(97,255,155,.15),
+        transparent 45%);
+}
+
+.login-visual::before{
+    content:"";
+
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(97,255,155,.18);
+
+    box-shadow:
+        0 0 50px rgba(97,255,155,.08);
+
+    animation:pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        transform:scale(1);
+        opacity:.6;
+    }
+
+    50%{
+        transform:scale(1.08);
+        opacity:1;
+    }
+}
+
+.recycle-symbol{
+    position:relative;
+    z-index:2;
+
+    font-size:190px;
+
+    color:#61ff9b;
+
+    text-shadow:
+        0 0 25px rgba(97,255,155,.4),
+        0 0 70px rgba(97,255,155,.15);
+}
+
+.visual-text{
+    position:absolute;
+
+    left:50px;
+    bottom:45px;
+}
+
+.visual-text small{
+    color:#61ff9b;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+}
+
+.visual-text h2{
+    margin-top:10px;
+
+    font-size:28px;
+
+    letter-spacing:-1px;
+}
+
+.visual-text p{
+    margin-top:10px;
+
+    max-width:270px;
+
+    color:rgba(255,255,255,.45);
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.login-panel{
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+
+    padding:65px 60px;
+
+    background:rgba(0,0,0,.16);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-size:24px;
+    font-weight:700;
+
+    margin-bottom:55px;
+}
+
+.logo-icon{
+    color:#61ff9b;
+
+    font-size:29px;
+}
+
+.logo span{
+    color:#61ff9b;
+}
+
+.login-panel small{
+    color:#61ff9b;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+}
+
+.login-panel h1{
+
+    font-size:48px;
+
+    letter-spacing:-2px;
+
+    margin:12px 0 10px;
+}
+
+.login-panel h1 span{
+    color:#61ff9b;
+}
+
+.subtitle{
+
+    color:rgba(255,255,255,.45);
+
+    font-size:13px;
+
+    line-height:1.7;
+
+    margin-bottom:35px;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:rgba(255,255,255,.5);
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+.form-group input{
+
+    width:100%;
+
+    padding:15px 16px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:10px;
+
+    outline:none;
+
+    background:rgba(255,255,255,.035);
+
+    color:white;
+
+    font-size:13px;
+
+    transition:.3s;
+}
+
+.form-group input:focus{
+
+    border-color:#61ff9b;
+
+    box-shadow:
+        0 0 18px rgba(97,255,155,.08);
+}
+
+.form-group input::placeholder{
+    color:rgba(255,255,255,.25);
+}
+
+/* PASSWORD */
+
+.password-wrapper{
+    position:relative;
+}
+
+.password-wrapper input{
+    padding-right:70px;
+}
+
+.show-password{
+
+    position:absolute;
+
+    right:15px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    border:none;
+
+    background:none;
+
+    color:#61ff9b;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+}
+
+/* BUTTON */
+
+.login-button{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:10px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#61ff9b;
+
+    color:#061009;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.login-button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(97,255,155,.15);
+}
+
+/* MESSAGE */
+
+.message{
+
+    min-height:20px;
+
+    margin-top:15px;
+
+    font-size:11px;
+
+    color:#61ff9b;
+}
+
+/* SIGNUP */
+
+.signup-link{
+
+    margin-top:28px;
+
+    text-align:center;
+
+    color:rgba(255,255,255,.45);
+
+    font-size:11px;
+}
+
+.signup-link a{
+
+    color:#61ff9b;
+
+    text-decoration:none;
+
+    margin-left:5px;
+}
+
+.signup-link a:hover{
+    text-decoration:underline;
+}
+
+/* BACK */
+
+.back-home{
+
+    margin-top:20px;
+
+    text-align:center;
+}
+
+.back-home a{
+
+    color:rgba(255,255,255,.35);
+
+    text-decoration:none;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+.back-home a:hover{
+    color:white;
+}
+
+/* WASTEWISE RESOURCE MESSAGE */
+.resource-message{
+    margin-top:24px;
+    padding-top:16px;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:rgba(255,255,255,.58);
+    font-size:11px;
+    line-height:1.7;
+    text-align:center;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+
+    body{
+        overflow:auto;
+    }
+
+    .login-wrapper{
+
+        grid-template-columns:1fr;
+
+        margin:20px;
+
+        min-height:auto;
+    }
+
+    .login-visual{
+
+        min-height:300px;
+    }
+
+    .recycle-symbol{
+        font-size:120px;
+    }
+
+    .visual-text{
+        left:30px;
+        bottom:25px;
+    }
+
+    .login-panel{
+        padding:45px 30px;
+    }
+
+    .logo{
+        margin-bottom:35px;
+    }
+}
+
+@media(max-width:500px){
+
+    .login-panel h1{
+        font-size:40px;
+    }
+
+    .login-visual{
+        min-height:250px;
+    }
+
+    .login-panel{
+        padding:35px 22px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+    <!-- =========================
+         LEFT VISUAL
+    ========================= -->
+
+    <div class="login-visual">
+
+        <div class="recycle-symbol">
+            ♻
+        </div>
+
+        <div class="visual-text">
+
+            <small>WELCOME BACK</small>
+
+            <h2>
+                MAKE A<br>
+                BETTER CHOICE.
+            </h2>
+
+            <p>
+                Continue your WasteWise journey
+                and keep building better waste habits.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         LOGIN PANEL
+    ========================= -->
+
+    <div class="login-panel">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                ♻
+            </div>
+
+            Waste<span>Wise</span>
+
+        </div>
+
+
+        <small>
+            ACCOUNT ACCESS
+        </small>
+
+
+        <h1>
+            WELCOME<br>
+            <span>BACK.</span>
+        </h1>
+
+
+        <p class="subtitle">
+            Sign in to continue your WasteWise journey.
+        </p>
+
+
+        <!-- LOGIN FORM -->
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword()">
+
+                        SHOW
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-button">
+
+                LOGIN →
+
+            </button>
+
+        </form>
+
+
+        <div
+            class="message"
+            id="message">
+        </div>
+
+
+        <div class="signup-link">
+
+            Don't have an account?
+
+            <a href="signin.html">
+                CREATE ACCOUNT
+            </a>
+
+        </div>
+
+
+        <div class="back-home">
+
+            <a href="index.html">
+                ← BACK TO WASTEWISE
+            </a>
+
+        </div>
+
+        <p class="resource-message">
+            Right use of resources today will result in better tomorrow.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   SHOW / HIDE PASSWORD
+========================= */
+
+function togglePassword(){
+
+    const password =
+        document.getElementById("password");
+
+    const button =
+        document.querySelector(".show-password");
+
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+        button.textContent = "HIDE";
+
+    }else{
+
+        password.type = "password";
+
+        button.textContent = "SHOW";
+
+    }
+}
+
+
+/* =========================
+   LOGIN FORM
+========================= */
+
+document
+.getElementById("loginForm")
+.addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+
+    const email =
+        document.getElementById("email").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    message.textContent =
+        "Signing you in...";
+
+
+    try{
+
+        const response =
+            await fetch("/api/login", {
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+                    email:email,
+                    password:password
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if(response.ok){
+
+            message.textContent =
+                "✓ Login successful!";
+
+
+            /*
+                The backend will eventually
+                return the logged-in user's data.
+            */
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "INTERFACE.html";
+
+            },700);
+
+        }else{
+
+            message.textContent =
+                data.message ||
+                "Login failed.";
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        message.textContent =
+            "Unable to connect to the server.";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

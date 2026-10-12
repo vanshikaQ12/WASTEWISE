@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WasteWise | Create Account</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+
+    background:
+        radial-gradient(circle at 50% 45%, rgba(50,220,110,.13), transparent 32%),
+        radial-gradient(circle at 50% 100%, rgba(24,75,45,.18), transparent 40%),
+        #050807;
+
+    color:white;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+/* BACKGROUND GRID */
+
+body::before{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    opacity:.07;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.05) 1px, transparent 1px);
+
+    background-size:70px 70px;
+
+    pointer-events:none;
+}
+
+
+/* =========================
+   MAIN WRAPPER
+========================= */
+
+.signup-wrapper{
+    width:100%;
+    max-width:1050px;
+
+    min-height:650px;
+
+    margin:30px;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.025);
+
+    backdrop-filter:blur(15px);
+
+    overflow:hidden;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.5),
+        0 0 60px rgba(97,255,155,.04);
+}
+
+
+/* =========================
+   LEFT VISUAL
+========================= */
+
+.signup-visual{
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:50px;
+
+    background:
+        radial-gradient(circle at center,
+        rgba(97,255,155,.15),
+        transparent 45%);
+}
+
+.signup-visual::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(97,255,155,.18);
+
+    box-shadow:
+        0 0 50px rgba(97,255,155,.08);
+
+    animation:pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        transform:scale(1);
+        opacity:.6;
+    }
+
+    50%{
+        transform:scale(1.08);
+        opacity:1;
+    }
+}
+
+.recycle-symbol{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:190px;
+
+    color:#61ff9b;
+
+    text-shadow:
+        0 0 25px rgba(97,255,155,.4),
+        0 0 70px rgba(97,255,155,.15);
+}
+
+.visual-text{
+
+    position:absolute;
+
+    left:50px;
+    bottom:45px;
+}
+
+.visual-text small{
+
+    color:#61ff9b;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+}
+
+.visual-text h2{
+
+    margin-top:10px;
+
+    font-size:28px;
+
+    letter-spacing:-1px;
+}
+
+.visual-text p{
+
+    margin-top:10px;
+
+    max-width:270px;
+
+    color:rgba(255,255,255,.45);
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   RIGHT PANEL
+========================= */
+
+.signup-panel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    padding:55px 60px;
+
+    background:rgba(0,0,0,.16);
+}
+
+
+/* LOGO */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    margin-bottom:40px;
+}
+
+.logo-icon{
+
+    color:#61ff9b;
+
+    font-size:29px;
+}
+
+.logo span{
+
+    color:#61ff9b;
+}
+
+
+/* HEADING */
+
+.signup-panel small{
+
+    color:#61ff9b;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+}
+
+.signup-panel h1{
+
+    font-size:46px;
+
+    letter-spacing:-2px;
+
+    line-height:.95;
+
+    margin:12px 0 10px;
+}
+
+.signup-panel h1 span{
+
+    color:#61ff9b;
+}
+
+.subtitle{
+
+    color:rgba(255,255,255,.45);
+
+    font-size:12px;
+
+    line-height:1.7;
+
+    margin-bottom:28px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group{
+
+    margin-bottom:15px;
+}
+
+.form-group label{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    color:rgba(255,255,255,.5);
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+.form-group input{
+
+    width:100%;
+
+    padding:13px 15px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:10px;
+
+    outline:none;
+
+    background:rgba(255,255,255,.035);
+
+    color:white;
+
+    font-size:13px;
+
+    transition:.3s;
+}
+
+.form-group input:focus{
+
+    border-color:#61ff9b;
+
+    box-shadow:
+        0 0 18px rgba(97,255,155,.08);
+}
+
+.form-group input::placeholder{
+
+    color:rgba(255,255,255,.25);
+}
+
+
+/* PASSWORD */
+
+.password-wrapper{
+
+    position:relative;
+}
+
+.password-wrapper input{
+
+    padding-right:65px;
+}
+
+.show-password{
+
+    position:absolute;
+
+    right:14px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    border:none;
+
+    background:none;
+
+    color:#61ff9b;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+}
+
+
+/* CREATE BUTTON */
+
+.signup-button{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:8px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#61ff9b;
+
+    color:#061009;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.signup-button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(97,255,155,.15);
+}
+
+
+/* MESSAGE */
+
+.message{
+
+    min-height:20px;
+
+    margin-top:12px;
+
+    font-size:11px;
+
+    color:#61ff9b;
+}
+
+
+/* LOGIN LINK */
+
+.login-link{
+
+    margin-top:22px;
+
+    text-align:center;
+
+    color:rgba(255,255,255,.45);
+
+    font-size:11px;
+}
+
+.login-link a{
+
+    color:#61ff9b;
+
+    text-decoration:none;
+
+    margin-left:5px;
+}
+
+.login-link a:hover{
+
+    text-decoration:underline;
+}
+
+
+/* BACK HOME */
+
+.back-home{
+
+    margin-top:17px;
+
+    text-align:center;
+}
+
+.back-home a{
+
+    color:rgba(255,255,255,.35);
+
+    text-decoration:none;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+.back-home a:hover{
+
+    color:white;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+
+    body{
+        overflow:auto;
+    }
+
+    .signup-wrapper{
+
+        grid-template-columns:1fr;
+
+        margin:20px;
+
+        min-height:auto;
+    }
+
+    .signup-visual{
+
+        min-height:280px;
+    }
+
+    .recycle-symbol{
+
+        font-size:120px;
+    }
+
+    .visual-text{
+
+        left:30px;
+        bottom:25px;
+    }
+
+    .signup-panel{
+
+        padding:45px 30px;
+    }
+
+    .logo{
+
+        margin-bottom:30px;
+    }
+}
+
+@media(max-width:500px){
+
+    .signup-panel h1{
+
+        font-size:40px;
+    }
+
+    .signup-panel{
+
+        padding:35px 22px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="signup-wrapper">
+
+
+    <!-- =========================
+         LEFT SIDE
+    ========================= -->
+
+    <div class="signup-visual">
+
+        <div class="recycle-symbol">
+            ♻
+        </div>
+
+        <div class="visual-text">
+
+            <small>START YOUR JOURNEY</small>
+
+            <h2>
+                LEARN.<br>
+                PLAY.<br>
+                IMPACT.
+            </h2>
+
+            <p>
+                Create your WasteWise account
+                and start building better
+                waste-management habits.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         RIGHT SIDE
+    ========================= -->
+
+    <div class="signup-panel">
+
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                ♻
+            </div>
+
+            Waste<span>Wise</span>
+
+        </div>
+
+
+        <small>
+            CREATE ACCOUNT
+        </small>
+
+
+        <h1>
+            JOIN<br>
+            <span>WASTEWISE.</span>
+        </h1>
+
+
+        <p class="subtitle">
+            Create an account and start your
+            sustainability journey.
+        </p>
+
+
+        <!-- SIGNUP FORM -->
+
+        <form id="signupForm">
+
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+                <label for="name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        minlength="6"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword('password', this)">
+
+                        SHOW
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Confirm your password"
+                        minlength="6"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword('confirmPassword', this)">
+
+                        SHOW
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="signup-button">
+
+                CREATE ACCOUNT →
+
+            </button>
+
+
+        </form>
+
+
+        <div
+            class="message"
+            id="message">
+        </div>
+
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="LOGIN.html">
+                LOGIN
+            </a>
+
+        </div>
+
+
+        <div class="back-home">
+
+            <a href="index.html">
+                ← BACK TO WASTEWISE
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   SHOW / HIDE PASSWORD
+========================= */
+
+function togglePassword(fieldId, button){
+
+    const password =
+        document.getElementById(fieldId);
+
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+        button.textContent = "HIDE";
+
+    }else{
+
+        password.type = "password";
+
+        button.textContent = "SHOW";
+
+    }
+}
+
+
+/* =========================
+   SIGNUP FORM
+========================= */
+
+document
+.getElementById("signupForm")
+.addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    /* CHECK PASSWORDS */
+
+    if(password !== confirmPassword){
+
+        message.textContent =
+            "Passwords do not match.";
+
+        return;
+    }
+
+
+    if(password.length < 6){
+
+        message.textContent =
+            "Password must be at least 6 characters.";
+
+        return;
+    }
+
+
+    message.textContent =
+        "Creating your account...";
+
+
+    try{
+
+        const response =
+            await fetch("http://localhost:3000/api/signup", {
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+
+                    name:name,
+
+                    email:email,
+
+                    password:password
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if(response.ok){
+
+            message.textContent =
+                "✓ Account created successfully!";
+
+
+            setTimeout(() => {
+
+              window.location.href = "/INTERFACE.html";  
+
+            },800);
+
+
+        }else{
+
+            message.textContent =
+                data.message ||
+                "Unable to create account.";
+
+        }
+
+
+    }catch(error){
+
+        console.error(error);
+
+        message.textContent =
+            "Unable to connect to the server.";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

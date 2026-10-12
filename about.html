@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WasteWise | About</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#050807;
+    color:white;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.page{
+    min-height:100vh;
+    padding:30px 6%;
+
+    background:
+        radial-gradient(circle at 20% 20%,rgba(97,255,155,.1),transparent 30%),
+        #050807;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding-bottom:25px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#61ff9b;
+}
+
+nav a{
+    color:rgba(255,255,255,.6);
+    text-decoration:none;
+
+    margin-left:28px;
+
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+nav a:hover,
+nav a.active{
+    color:#61ff9b;
+}
+
+.about{
+    margin-top:80px;
+
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:80px;
+
+    align-items:center;
+}
+
+.about small{
+    color:#61ff9b;
+    letter-spacing:4px;
+}
+
+.about h1{
+    font-size:70px;
+    line-height:.95;
+
+    margin:18px 0 30px;
+}
+
+.about h1 span{
+    color:#61ff9b;
+}
+
+.about p{
+    color:rgba(255,255,255,.58);
+    line-height:1.9;
+    max-width:600px;
+}
+
+/* VISUAL */
+
+.visual{
+    min-height:430px;
+
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    position:relative;
+
+    background:
+        radial-gradient(circle,rgba(97,255,155,.12),transparent 50%);
+}
+
+.recycle{
+    font-size:180px;
+    color:#61ff9b;
+
+    text-shadow:
+        0 0 30px rgba(97,255,155,.4),
+        0 0 80px rgba(97,255,155,.15);
+
+    animation:rotate 12s linear infinite;
+}
+
+@keyframes rotate{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* MISSION */
+
+.mission{
+    margin-top:80px;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.mission-card{
+    padding:30px;
+
+    border-top:1px solid rgba(97,255,155,.4);
+}
+
+.mission-card h2{
+    margin:20px 0 12px;
+}
+
+.mission-card p{
+    color:rgba(255,255,255,.5);
+    line-height:1.7;
+    font-size:13px;
+}
+
+.number{
+    color:#61ff9b;
+}
+
+@media(max-width:850px){
+
+    .about{
+        grid-template-columns:1fr;
+    }
+
+    .about h1{
+        font-size:48px;
+    }
+
+    .mission{
+        grid-template-columns:1fr;
+    }
+
+    nav div:last-child{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<nav>
+
+    <div class="logo">
+        Waste<span>Wise</span>
+    </div>
+
+    <div>
+        <a href="LEARN.html">Learn</a>
+        <a href="PLAY.html">Play</a>
+        <a href="ABOUT.html" class="active">About</a>
+        <a href="PROGRESS.html">Progress</a>
+    </div>
+
+</nav>
+
+<section class="about">
+
+    <div>
+
+        <small> ABOUT WASTEWISE</small>
+
+        <h1>
+            SMALL<br>
+            CHOICES.<br>
+            <span>BIG IMPACT.</span>
+        </h1>
+
+        <p>
+            WasteWise is a data-driven awareness platform
+            designed to make waste management easier,
+            more interactive and more engaging.
+
+            <br><br>
+
+            Instead of simply telling people what they
+            should do, WasteWise helps users learn,
+            experiment, play and understand the impact
+            of their everyday waste decisions.
+        </p>
+
+    </div>
+
+    <div class="visual">
+
+        <div class="recycle">
+            ♻
+        </div>
+
+    </div>
+
+</section>
+
+<section class="mission">
+
+    <div class="mission-card">
+
+        <div class="number">01</div>
+
+        <h2>EDUCATE</h2>
+
+        <p>
+            Make waste-management concepts easier
+            to understand through simple learning content.
+        </p>
+
+    </div>
+
+    <div class="mission-card">
+
+        <div class="number">02</div>
+
+        <h2>ENGAGE</h2>
+
+        <p>
+            Use games, challenges and interactive
+            experiences to make learning interesting.
+        </p>
+
+    </div>
+
+    <div class="mission-card">
+
+        <div class="number">03</div>
+
+        <h2>INSPIRE</h2>
+
+        <p>
+            Encourage users to turn knowledge into
+            responsible everyday action.
+        </p>
+
+    </div>
+
+</section>
+
+</div>
+
+</body>
+</html>
