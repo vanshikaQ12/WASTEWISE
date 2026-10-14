@@ -7,6 +7,8 @@ const OpenAI = require("openai")
 const multer = require("multer")
 require("dotenv").config();
 const User = require('./models/user');
+
+/* =========================
 /* =========================
    WASTEWISE AI SETUP
 ========================= */
