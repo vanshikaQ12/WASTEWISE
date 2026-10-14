@@ -6,8 +6,7 @@ const { MongoStore } = require("connect-mongo");
 const OpenAI = require("openai")
 const multer = require("multer")
 require("dotenv").config();
-
-const User = require("./models/User");
+const User = require('./models/user');
 /* =========================
    WASTEWISE AI SETUP
 ========================= */
