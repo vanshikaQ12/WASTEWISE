@@ -4,7 +4,8 @@
   "description": "WasteWise waste management awareness application",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "netlify:build": "node scripts/netlify-build.js"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,7 @@
     "express-session": "^1.19.0",
     "mongoose": "^9.11.0",
     "multer": "^2.4.0",
-    "openai": "^7.32.0"
+    "openai": "^7.32.0",
+    "serverless-http": "^3.2.0"
   }
 }

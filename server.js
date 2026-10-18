@@ -13,9 +13,9 @@ const User = require('./models/user');
    WASTEWISE AI SETUP
 ========================= */
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-});
+const openai = process.env.OPENAI_API_KEY
+    ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+    : null;
 
 const upload = multer({
     storage: multer.memoryStorage(),
@@ -51,6 +51,7 @@ const WASTE_CATEGORIES = [
 ];
 
 const app = express();
+app.set("trust proxy", 1);
 
 // Read JSON sent from the frontend
 app.use(express.json());
@@ -71,7 +72,7 @@ app.use(
 
         cookie: {
             httpOnly: true,
-            secure: false,
+            secure: process.env.NETLIFY === "true" || process.env.NODE_ENV === "production",
             sameSite: "lax",
             maxAge: 1000 * 60 * 60 * 24
         }
@@ -370,6 +371,11 @@ app.post(
     },
 
     async (req, res) => {
+        if (!openai) {
+            return res.status(503).json({
+                message: "Photo analysis is not configured on this deployment yet."
+            });
+        }
         try {
             if (!req.file) {
                 return res.status(400).json({
@@ -738,19 +744,20 @@ app.use(express.static(__dirname));
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGODB_URI, {
-    family: 4
-})
-.then(() => {
-    console.log("MongoDB connected successfully!");
+module.exports = app;
 
-    app.listen(PORT, "0.0.0.0", () => {
-        console.log(`WasteWise server running on port ${PORT}`);
+if (require.main === module) {
+    mongoose.connect(process.env.MONGODB_URI, {
+        family: 4,
+        serverSelectionTimeoutMS: 15000
+    })
+    .then(() => {
+        console.log("MongoDB connected successfully!");
+        app.listen(PORT, "0.0.0.0", () => {
+            console.log(`WasteWise server running on port ${PORT}`);
+        });
+    })
+    .catch((error) => {
+        console.error("MongoDB connection failed:", error.message);
     });
-})
-.catch((error) => {
-    console.error(
-        "MongoDB connection failed:",
-        error.message
-    );
-});
+}
