@@ -9,7 +9,6 @@ require("dotenv").config();
 const User = require('./models/user');
 
 /* =========================
-/* =========================
    WASTEWISE AI SETUP
 ========================= */
 
@@ -56,6 +55,34 @@ app.set("trust proxy", 1);
 // Read JSON sent from the frontend
 app.use(express.json());
 
+// Fallback for Netlify/serverless requests when the adapter does not expose
+// the JSON payload as a readable stream to Express's built-in JSON parser.
+app.use((req, res, next) => {
+    const rawBody = req.netlifyRawBody;
+    const contentType = String(req.headers["content-type"] || "").toLowerCase();
+
+    if (
+        (!req.body || typeof req.body !== "object" || Object.keys(req.body).length === 0) &&
+        typeof rawBody === "string" &&
+        rawBody.trim() &&
+        (contentType.includes("application/json") || contentType.includes("+json"))
+    ) {
+        try {
+            const parsedBody = JSON.parse(rawBody);
+            if (parsedBody && typeof parsedBody === "object" && !Array.isArray(parsedBody)) {
+                req.body = parsedBody;
+            }
+        } catch (error) {
+            return res.status(400).json({ message: "Invalid JSON request body." });
+        }
+    }
+
+    if (!req.body || typeof req.body !== "object") {
+        req.body = {};
+    }
+    next();
+});
+
 
 app.use(
     session({
@@ -64,11 +91,12 @@ app.use(
         saveUninitialized: false,
 
         store: MongoStore.create({
-            mongoUrl: process.env.MONGODB_URI,
-            mongoOptions: {
-                family: 4
-            }
-        }),
+    mongoUrl: process.env.MONGODB_URI,
+    mongoOptions: {
+        family: 4,
+        autoSelectFamily: false
+    }
+}),
 
         cookie: {
             httpOnly: true,
@@ -742,22 +770,56 @@ app.use(express.static(__dirname));
    START SERVER
 ========================= */
 
+/* =========================
+   START SERVER
+========================= */
+
 const PORT = process.env.PORT || 3000;
 
+/*
+   Netlify imports this file as a module.
+   Export the Express application so the
+   Netlify function can use it.
+*/
 module.exports = app;
 
+/*
+   Only start a normal HTTP server when
+   server.js is run directly with Node.
+
+   Netlify will NOT execute this block.
+*/
 if (require.main === module) {
+
     mongoose.connect(process.env.MONGODB_URI, {
-        family: 4,
-        serverSelectionTimeoutMS: 15000
-    })
+    family: 4,
+    autoSelectFamily: false,
+    serverSelectionTimeoutMS: 15000
+})
+
     .then(() => {
+
         console.log("MongoDB connected successfully!");
+
         app.listen(PORT, "0.0.0.0", () => {
-            console.log(`WasteWise server running on port ${PORT}`);
+
+            console.log(
+                `WasteWise server running on port ${PORT}`
+            );
+
         });
+
     })
+
     .catch((error) => {
-        console.error("MongoDB connection failed:", error.message);
+
+        console.error(
+            "MongoDB connection failed:",
+            error.message
+        );
+
+        process.exit(1);
+
     });
+
 }

@@ -4,7 +4,18 @@ const app = require("../../server");
 
 // Keep a reusable connection promise in a warm Netlify function instance.
 let databaseConnectionPromise;
-const expressHandler = serverless(app);
+const expressHandler = serverless(app, {
+    // Preserve the original Netlify event payload for the Express fallback parser.
+    request: (request, event) => {
+        if (typeof event.body === "string") {
+            request.netlifyRawBody = event.isBase64Encoded
+                ? Buffer.from(event.body, "base64").toString("utf8")
+                : event.body;
+        } else if (Buffer.isBuffer(event.body)) {
+            request.netlifyRawBody = event.body.toString("utf8");
+        }
+    }
+});
 
 exports.handler = async (event, context) => {
     // Allow the runtime to reuse open database connections between invocations.
