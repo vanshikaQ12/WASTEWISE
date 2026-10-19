@@ -57,32 +57,45 @@ app.use(express.json());
 
 // Fallback for Netlify/serverless requests when the adapter does not expose
 // the JSON payload as a readable stream to Express's built-in JSON parser.
+// Recover JSON body preserved by the Netlify Function adapter.
 app.use((req, res, next) => {
     const rawBody = req.netlifyRawBody;
-    const contentType = String(req.headers["content-type"] || "").toLowerCase();
+    const contentType = String(
+        req.headers["content-type"] || ""
+    ).toLowerCase();
 
     if (
-        (!req.body || typeof req.body !== "object" || Object.keys(req.body).length === 0) &&
+        (!req.body ||
+            typeof req.body !== "object" ||
+            Object.keys(req.body).length === 0) &&
         typeof rawBody === "string" &&
         rawBody.trim() &&
-        (contentType.includes("application/json") || contentType.includes("+json"))
+        (contentType.includes("application/json") ||
+            contentType.includes("+json"))
     ) {
         try {
             const parsedBody = JSON.parse(rawBody);
-            if (parsedBody && typeof parsedBody === "object" && !Array.isArray(parsedBody)) {
+
+            if (
+                parsedBody &&
+                typeof parsedBody === "object" &&
+                !Array.isArray(parsedBody)
+            ) {
                 req.body = parsedBody;
             }
         } catch (error) {
-            return res.status(400).json({ message: "Invalid JSON request body." });
+            return res.status(400).json({
+                message: "Invalid JSON request body."
+            });
         }
     }
 
     if (!req.body || typeof req.body !== "object") {
         req.body = {};
     }
+
     next();
 });
-
 
 app.use(
     session({
